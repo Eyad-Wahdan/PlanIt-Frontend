@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Hello World!"/>
+    <img alt="PlanIt logo" src="../assets/logo.png">
+    <HelloWorld style="font-family:'Times New Roman',serif;" msg="Welcome to PlanIt!"/>
   </div>
 </template>
 
@@ -16,3 +16,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>
