@@ -1,5 +1,7 @@
 # planit-frontend
 
+[![CI](https://github.com/Eyad-Wahdan/PlanIt-Frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/Eyad-Wahdan/PlanIt-Frontend/actions/workflows/ci.yml)
+
 ## Project setup
 ```
 npm install
