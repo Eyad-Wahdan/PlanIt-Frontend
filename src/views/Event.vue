@@ -42,13 +42,36 @@
     <li>29</li>
     <li>30</li>
     <li>31</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'Event'
+  name: 'Event',
+  data () {
+    return {
+      events: [
+        {
+          id: 1,
+          date: '2021-11-25',
+          time: '12:30:00',
+          event: 'Mein Zahnarzttermin'
+        },
+        {
+          id: 2,
+          date: '2022-01-15',
+          time: '15:30:00',
+          event: 'Mein Hochzeitstermin'
+        }
+      ]
+    }
+  }
 }
+
 </script>
 
 <style scoped>
