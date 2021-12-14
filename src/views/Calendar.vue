@@ -1,5 +1,5 @@
 <template>
-<h1 style="font-family:'Times New Roman',serif;">Have a look at your Events!</h1>
+<h1 style="font-family:'Times New Roman',serif;">Have a look at your Calendar!</h1>
   <br>
   <ul class="weekdays">
     <li>Mo</li>
@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  name: 'Event',
+  name: 'Calendar',
   data () {
     return {
       events: [
