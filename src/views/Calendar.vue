@@ -51,25 +51,7 @@
 
 <script>
 export default {
-  name: 'Calendar',
-  data () {
-    return {
-      events: [
-        {
-          id: 1,
-          date: '2021-11-25',
-          time: '12:30:00',
-          event: 'Mein Zahnarzttermin'
-        },
-        {
-          id: 2,
-          date: '2022-01-15',
-          time: '15:30:00',
-          event: 'Mein Hochzeitstermin'
-        }
-      ]
-    }
-  }
+  name: 'Calendar'
 }
 
 </script>
