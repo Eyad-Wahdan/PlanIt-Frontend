@@ -1,19 +1,14 @@
 <template>
   <div class="home">
     <img alt="PlanIt logo" src="../assets/logo.png">
-    <HelloWorld style="font-family:'Times New Roman',serif;" msg="Welcome to PlanIt!"/>
+    <h1 style="font-family:'Times New Roman',serif;">Welcome to PlanIt!</h1>
+    <router-link to='../views/calendar' tag="button" class="btn btn-primary">Let's Get Started</router-link>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+  name: 'Home'
 }
 </script>
 
