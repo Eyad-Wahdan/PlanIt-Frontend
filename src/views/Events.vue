@@ -12,15 +12,24 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-if="events.length === 0">
+      <tr class="noItem" v-if="events.length === 0">
         <td colspan="5">Ups! There are no events in your list!</td>
       </tr>
       <tr v-for="event in events" :key="event.id">
         <td>{{ event.id }}</td>
-        <td>{{ formatDate(event.start)}}</td>
+        <td>{{ formatDate(event.start) }}</td>
         <td>{{ event.start.toLocaleTimeString().slice(0, -3) }}</td>
         <td>{{ event.finish.toLocaleTimeString().slice(0, -3) }}</td>
         <td>{{ event.event }}</td>
+        <td id ="buttons">
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false">Functions↴</button>
+          <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <li><a class="dropdown-item" href="#">Function1</a></li>
+            <li><a class="dropdown-item" href="#">Function2</a></li>
+          </ul>
+        </div>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -78,6 +87,9 @@ td, th {
   border: 1px solid #eeeeee;
   text-align: left;
   padding: 8px;
+}
+.noItem td {
+  text-align: center;
 }
 
 tr:nth-child(even) {
