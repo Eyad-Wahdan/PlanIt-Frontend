@@ -18,7 +18,8 @@
     "core-js": "^3.6.5",
     "tui-calendar": "^1.15.1",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.0-0",
+    "vue-spring-calendar": "^0.2.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
