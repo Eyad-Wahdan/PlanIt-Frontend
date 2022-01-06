@@ -62,10 +62,10 @@
         <br>
         Wir haben die Lösung für euch: PlanIt!</p>
       <div class="work">
-      <h3>Wie funktioniert PlanIt?</h3>
-      <p>Sobald man PlanIt startet gelangt man auf die Homepage. Von da aus kann man auf "Lets get started" klicken und man gelangt damit auf "Events".
-        Da kann man auf einen "Termin erstellen" klicken und dann das Datum und die Uhrzeit angeben, wann der Termin stattfinden soll.</p>
-    </div>
+        <h3>Wie funktioniert PlanIt?</h3>
+        <p>Sobald man PlanIt startet gelangt man auf die Homepage. Von da aus kann man auf "Lets get started" klicken und man gelangt damit auf "Events".
+          Da kann man auf einen "Termin erstellen" klicken und dann das Datum und die Uhrzeit angeben, wann der Termin stattfinden soll.</p>
+      </div>
     </div>
   </section>
   <div class="box">
