@@ -6,19 +6,21 @@
       <tr>
         <th>Id</th>
         <th>Date</th>
-        <th>Time</th>
+        <th>Start-Time</th>
+        <th>End-Time</th>
         <th>Event</th>
       </tr>
       </thead>
       <tbody>
       <tr v-if="events.length === 0">
-        <td colspan="4">Ups! There are no events in your list!</td>
+        <td colspan="5">Ups! There are no events in your list!</td>
       </tr>
       <tr v-for="event in events" :key="event.id">
-        <td>{{event.id}}</td>
-        <td>{{event.date}}</td>
-        <td>{{event.time}}</td>
-        <td>{{event.event}}</td>
+        <td>{{ event.id }}</td>
+        <td>{{ formatDate(event.start)}}</td>
+        <td>{{ event.start.toLocaleTimeString().slice(0, -3) }}</td>
+        <td>{{ event.finish.toLocaleTimeString().slice(0, -3) }}</td>
+        <td>{{ event.event }}</td>
       </tr>
       </tbody>
     </table>
@@ -34,8 +36,13 @@ export default {
     }
   },
   methods: {
+    formatDate (date) {
+      const day = String(date.getDate()).padStart(2, '0')
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const year = date.getUTCFullYear()
+      return `${day}.${month}.${year}`
+    },
     loadEvents () {
-      console.log('Ausgeführt')
       const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
       const endpoint = baseUrl + '/termin/'
       const requestOptions = {
@@ -45,8 +52,9 @@ export default {
       fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(result => result.forEach(event => {
+          event.start = new Date(event.start)
+          event.finish = new Date(event.finish)
           this.events.push(event)
-          console.log('Done!')
         }))
         .catch(error => console.log('error', error))
     }
@@ -65,12 +73,14 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+
 td, th {
-  border: 1px solid #dddddd;
-  text-align: -moz-center;
+  border: 1px solid #eeeeee;
+  text-align: left;
   padding: 8px;
 }
+
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #e8e8e8;
 }
 </style>
