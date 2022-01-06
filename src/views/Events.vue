@@ -9,11 +9,12 @@
         <th>Start-Time</th>
         <th>End-Time</th>
         <th>Event</th>
+        <th>Edit</th>
       </tr>
       </thead>
       <tbody>
       <tr class="noItem" v-if="events.length === 0">
-        <td colspan="5">Ups! There are no events in your list!</td>
+        <td colspan=6>Ups! There are no events in your list!</td>
       </tr>
       <tr v-for="event in events" :key="event.id">
         <td>{{ event.id }}</td>
@@ -21,14 +22,8 @@
         <td>{{ event.start.toLocaleTimeString().slice(0, -3) }}</td>
         <td>{{ event.finish.toLocaleTimeString().slice(0, -3) }}</td>
         <td>{{ event.event }}</td>
-        <td id ="buttons">
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false">Functions↴</button>
-          <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <li><a class="dropdown-item" href="#">Function1</a></li>
-            <li><a class="dropdown-item" href="#">Function2</a></li>
-          </ul>
-        </div>
+        <td class="deleteButton">
+          <button type="button" class="btn btn-outline-danger">Delete</button>
         </td>
       </tr>
       </tbody>
@@ -76,23 +71,46 @@ export default {
 
 <style scoped>
 table {
+  border-collapse: collapse;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  min-width: 400px;
   font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+  width: 97%;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgb(0, 0, 0, 0.20);
 }
 
-td, th {
-  border: 1px solid #eeeeee;
+table thead {
+  background-color: #4169E1;
+  color: #ffffff;
   text-align: left;
-  padding: 8px;
+  font-weight: bold;
 }
-.noItem td {
-  text-align: center;
+
+td, th:not(last-of-type) {
+  padding: 12px 15px;
+  border-right: 1px solid #eeeeee;
+  text-align: left;
+}
+
+tbody td:not(.deleteButton) {
+  border-bottom: 1px solid #dddddd;
 }
 
 tr:nth-child(even) {
   background-color: #e8e8e8;
+}
+
+tbody td:last-of-type {
+  background-color: white;
+  text-align: center;
+  width: 100px;
+}
+
+.noItem td {
+  text-align: center;
 }
 </style>
