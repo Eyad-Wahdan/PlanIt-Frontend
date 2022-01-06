@@ -9,7 +9,7 @@
         <th>Start-Time</th>
         <th>End-Time</th>
         <th>Event</th>
-        <th>Edit</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -100,15 +100,17 @@ tbody td:not(.deleteButton) {
   border-bottom: 1px solid #dddddd;
 }
 
-tr:nth-child(even) {
-  background-color: #e8e8e8;
-}
+/*tr:nth-child(even) {*/
+/*  background-color: #e8e8e8;*/
+/*}*/
 
 tbody td:last-of-type {
   background-color: white;
   text-align: center;
   width: 100px;
 }
+
+tr:hover td:not(.deleteButton) {background-color: #c7c6c6;}
 
 .noItem td {
   text-align: center;
