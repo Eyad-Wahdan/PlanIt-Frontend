@@ -7,7 +7,7 @@
         <th>Id</th>
         <th>Date</th>
         <th>Start-Time</th>
-        <th>End-Time</th>
+        <th>Finish-Time</th>
         <th>Event</th>
         <th></th>
       </tr>
@@ -25,6 +25,14 @@
         <td class="deleteButton">
           <button type="button" class="btn btn-outline-danger">Delete</button>
         </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td> <input class="input-group-text" v-model="dateField" placeholder="Date"> </td>
+        <td> <input class="input-group-text" v-model="startTimeField" placeholder="Start-Time"> </td>
+        <td> <input class="input-group-text" v-model="finishTimeField" placeholder="Finish-Time"> </td>
+        <td> <input class="input-group-text" v-model="eventField" placeholder="Event" @keyup.enter="create()"> </td>
+        <td> <button type="button" class="btn btn-outline-success" @click="create()">Create</button> </td>
       </tr>
       </tbody>
     </table>
@@ -61,6 +69,32 @@ export default {
           this.events.push(event)
         }))
         .catch(error => console.log('error', error))
+    },
+    create () {
+      const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
+      const endpoint = baseUrl + '/termin/'
+      const date = this.dateField.split('.').reverse().join('-')
+      const startdate = new Date(date + ' ' + this.startTimeField)
+      const finishdate = new Date(date + ' ' + this.finishTimeField)
+      const data = {
+        start: startdate,
+        finish: finishdate,
+        event: this.eventField
+      }
+      location.reload()
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+      fetch(endpoint, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Created successfully', data)
+        })
+        .catch(error => console.log('error', error))
     }
   },
   mounted () {
@@ -96,13 +130,17 @@ td, th:not(last-of-type) {
   text-align: left;
 }
 
-tbody td:not(.deleteButton) {
-  border-bottom: 1px solid #dddddd;
+th:last-of-type {
+  border-left: none;
 }
 
-/*tr:nth-child(even) {*/
-/*  background-color: #e8e8e8;*/
-/*}*/
+th:nth-last-of-type(2) {
+  border-right: none;
+}
+
+tbody td {
+  border-bottom: 1px solid #dddddd;
+}
 
 tbody td:last-of-type {
   background-color: white;
@@ -110,8 +148,11 @@ tbody td:last-of-type {
   width: 100px;
 }
 
-tr:hover td:not(.deleteButton) {background-color: #c7c6c6;}
+tr:hover td {background-color: #cbcaca;}
 
+button {
+  background-color: white;
+}
 .noItem td {
   text-align: center;
 }
