@@ -14,7 +14,7 @@
   </body>
 </template>
 
-<style>
+<style scoped>
 
 #background {
   height: 100vh;

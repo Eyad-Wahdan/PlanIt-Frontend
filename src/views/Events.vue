@@ -44,7 +44,11 @@ export default {
   name: 'Events',
   data () {
     return {
-      events: []
+      events: [],
+      dateField: '',
+      startTimeField: '',
+      finishTimeField: '',
+      eventField: ''
     }
   },
   methods: {
@@ -54,34 +58,36 @@ export default {
       const year = date.getUTCFullYear()
       return `${day}.${month}.${year}`
     },
-    loadEvents () {
+    async loadEvents () {
+      this.events = []
       const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
       const endpoint = baseUrl + '/termin/'
       const requestOptions = {
         method: 'GET',
         redirect: 'follow'
       }
-      fetch(endpoint, requestOptions)
+      const responseEvents = []
+      await fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(result => result.forEach(event => {
           event.start = new Date(event.start)
           event.finish = new Date(event.finish)
-          this.events.push(event)
+          responseEvents.push(event)
         }))
         .catch(error => console.log('error', error))
+      this.events = responseEvents
     },
     create () {
       const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
       const endpoint = baseUrl + '/termin/'
       const date = this.dateField.split('.').reverse().join('-')
-      const startdate = new Date(date + ' ' + this.startTimeField)
-      const finishdate = new Date(date + ' ' + this.finishTimeField)
+      const startDate = new Date(date + ' ' + this.startTimeField)
+      const finishDate = new Date(date + ' ' + this.finishTimeField)
       const data = {
-        start: startdate,
-        finish: finishdate,
+        start: startDate,
+        finish: finishDate,
         event: this.eventField
       }
-      location.reload()
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -90,9 +96,13 @@ export default {
         body: JSON.stringify(data)
       }
       fetch(endpoint, requestOptions)
-        .then(response => response.json())
         .then(data => {
           console.log('Created successfully', data)
+          this.loadEvents()
+          this.dateField = ''
+          this.startTimeField = ''
+          this.finishTimeField = ''
+          this.eventField = ''
         })
         .catch(error => console.log('error', error))
     }
