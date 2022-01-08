@@ -82,6 +82,7 @@
   padding-top: 70px;
 }
 .body{
+  overflow: hidden;
   height: 100vh;
   width: 100%;
   color: #fff;
