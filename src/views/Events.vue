@@ -9,7 +9,9 @@
         <th>Start-Time</th>
         <th>Finish-Time</th>
         <th>Event</th>
-        <th></th>
+        <th>
+          <button id="refreshButton" type="button" class="btn btn-outline-primary" @click="loadEvents()">Refresh</button>
+        </th>
       </tr>
       </thead>
       <tbody>
@@ -23,7 +25,7 @@
         <td>{{ event.finish.toLocaleTimeString().slice(0, -3) }}</td>
         <td>{{ event.event }}</td>
         <td class="deleteButton">
-          <button type="button" class="btn btn-outline-danger">Delete</button>
+          <button type="button" class="btn btn-outline-danger" @click="erase()">Delete</button>
         </td>
       </tr>
       <tr>
@@ -68,6 +70,25 @@ export default {
       return date instanceof Date && !isNaN(date)
     },
     async loadEvents () {
+      this.events = []
+      const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
+      const endpoint = baseUrl + '/termin/'
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      }
+      const responseEvents = []
+      await fetch(endpoint, requestOptions)
+        .then(response => response.json())
+        .then(result => result.forEach(event => {
+          event.start = new Date(event.start)
+          event.finish = new Date(event.finish)
+          responseEvents.push(event)
+        }))
+        .catch(error => console.log('error', error))
+      this.events = responseEvents
+    },
+    async erase () {
       this.events = []
       const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
       const endpoint = baseUrl + '/termin/'
@@ -139,6 +160,18 @@ export default {
 </script>
 
 <style scoped>
+
+h1 {
+  margin: 0;
+  display: inline-block;
+}
+
+#refreshButton {
+  background-color: #4169E1;
+  color: #ffffff;
+  border-color: white;
+  font-weight: bold;
+}
 
 table {
   border-collapse: collapse;
