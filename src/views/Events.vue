@@ -28,7 +28,7 @@
       </tr>
       <tr>
         <td></td>
-        <td> <input class="input-group-text" v-model="dateField" placeholder="Date"> </td>
+        <td> <input class="input-group-text" v-model="dateField" placeholder="dd.mm.yyyy"> </td>
         <td> <input class="input-group-text" v-model="startTimeField" placeholder="Start-Time"> </td>
         <td> <input class="input-group-text" v-model="finishTimeField" placeholder="Finish-Time"> </td>
         <td> <input class="input-group-text" v-model="eventField" placeholder="Event" @keyup.enter="create()"> </td>
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus'
+
 export default {
   name: 'Events',
   data () {
@@ -57,6 +59,13 @@ export default {
       const month = String(date.getMonth() + 1).padStart(2, '0')
       const year = date.getUTCFullYear()
       return `${day}.${month}.${year}`
+    },
+    isValidDateFormat (date) {
+      return date.match(/\d{2}.\d{2}.\d{4}?$/) !== null
+    },
+    isValidDate (dateString) {
+      const date = new Date(dateString)
+      return date instanceof Date && !isNaN(date)
     },
     async loadEvents () {
       this.events = []
@@ -77,34 +86,50 @@ export default {
         .catch(error => console.log('error', error))
       this.events = responseEvents
     },
-    create () {
-      const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
-      const endpoint = baseUrl + '/termin/'
-      const date = this.dateField.split('.').reverse().join('-')
-      const startDate = new Date(date + ' ' + this.startTimeField)
-      const finishDate = new Date(date + ' ' + this.finishTimeField)
-      const data = {
-        start: startDate,
-        finish: finishDate,
-        event: this.eventField
-      }
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }
-      fetch(endpoint, requestOptions)
-        .then(data => {
-          console.log('Created successfully', data)
-          this.loadEvents()
-          this.dateField = ''
-          this.startTimeField = ''
-          this.finishTimeField = ''
-          this.eventField = ''
+    create: function () {
+      if ((this.dateField !== '') && (this.startTimeField !== '') && (this.finishTimeField !== '') && (this.eventField !== '')) {
+        const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
+        const endpoint = baseUrl + '/termin/'
+        const date = this.dateField.split('.').reverse().join('-')
+        const startDate = new Date(date + ' ' + this.startTimeField)
+        const finishDate = new Date(date + ' ' + this.finishTimeField)
+        if (!this.isValidDate(date) || !this.isValidDate(startDate) || !this.isValidDate(finishDate) || this.eventField === ' ' ||
+          finishDate <= startDate) {
+          ElMessage.error('Oops, check your input!')
+          return
+        }
+        const data = {
+          start: startDate,
+          finish: finishDate,
+          event: this.eventField
+        }
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        fetch(endpoint, requestOptions)
+          .then(data => {
+            console.log('Created successfully', data)
+            this.loadEvents()
+            this.dateField = ''
+            this.startTimeField = ''
+            this.finishTimeField = ''
+            this.eventField = ''
+            ElMessage({
+              message: 'Congrats, your event was created!',
+              type: 'success'
+            })
+          })
+          .catch(error => console.log('error', error))
+      } else {
+        ElMessage({
+          message: 'Warning, your event is not complete!',
+          type: 'warning'
         })
-        .catch(error => console.log('error', error))
+      }
     }
   },
   mounted () {
@@ -114,6 +139,7 @@ export default {
 </script>
 
 <style scoped>
+
 table {
   border-collapse: collapse;
   margin-top: 20px;
@@ -158,11 +184,14 @@ tbody td:last-of-type {
   width: 100px;
 }
 
-tr:hover td {background-color: #cbcaca;}
+tr:hover td {
+  background-color: #cbcaca;
+}
 
 button {
   background-color: white;
 }
+
 .noItem td {
   text-align: center;
 }
