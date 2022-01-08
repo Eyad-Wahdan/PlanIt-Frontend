@@ -1,8 +1,8 @@
 <template>
   <body id="background">
   <div id="elements">
-    <img alt="PlanIt logo" src="../assets/logo.png">
-    <h2 class="heading">Welcome to PlanIt!</h2>
+    <img class="picture" alt="PlanIt logo" src="../assets/logo.png">
+    <h2 id="heading">Welcome to PlanIt</h2>
     <router-link to='../views/calendar' tag="button" class="btn btn-primary">Let's Get Started</router-link>
   </div>
   <div id="stars">
@@ -15,8 +15,14 @@
 </template>
 
 <style scoped>
+.picture{
+  height: 400px;
+  width: 600px;
+  padding-left: 150px;
+}
 
 #background {
+  overflow: hidden;
   height: 100vh;
   background: linear-gradient(#090042, #011c93, #090042);
 }
@@ -31,7 +37,7 @@
   font-weight: 300;
 }
 
-.heading {
+#heading {
   font-size: 60px;
   padding-bottom: 15px;
   padding-top: 5px;
@@ -39,8 +45,11 @@
 }
 
 .btn {
-  height: 40px;
+  height: 46px;
   width: 200px;
+  background-color: royalblue;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 20px;
 }
 #stars {
 width: 1px;
