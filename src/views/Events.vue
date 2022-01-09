@@ -34,8 +34,8 @@
         <td> <input class="input-group-text" v-model="dateField" placeholder="dd.mm.yyyy"> </td>
         <td> <input class="input-group-text" v-model="startTimeField" placeholder="Start-Time"> </td>
         <td> <input class="input-group-text" v-model="finishTimeField" placeholder="Finish-Time"> </td>
-        <td> <input class="input-group-text" v-model="eventField" placeholder="Event" @keyup.enter="create(dateField, startTimeField, finishTimeField, eventField)"> </td>
-        <td> <button type="button" class="btn btn-outline-success" @click="create(dateField, startTimeField, finishTimeField, eventField)">Create</button> </td>
+        <td> <input class="input-group-text" v-model="eventField" placeholder="Event" @keyup.enter="create(this.dateField, this.startTimeField, this.finishTimeField, this.eventField)"> </td>
+        <td> <button type="button" class="btn btn-outline-success" @click="create(this.dateField, this.startTimeField, this.finishTimeField, this.eventField)">Create</button> </td>
       </tr>
       </tbody>
     </table>
