@@ -34,8 +34,8 @@
         <td> <input class="input-group-text" v-model="dateField" placeholder="dd.mm.yyyy"> </td>
         <td> <input class="input-group-text" v-model="startTimeField" placeholder="Start-Time"> </td>
         <td> <input class="input-group-text" v-model="finishTimeField" placeholder="Finish-Time"> </td>
-        <td> <input class="input-group-text" v-model="eventField" placeholder="Event" @keyup.enter="create()"> </td>
-        <td> <button type="button" class="btn btn-outline-success" @click="create()">Create</button> </td>
+        <td> <input class="input-group-text" v-model="eventField" placeholder="Event" @keyup.enter="create(dateField, startTimeField, finishTimeField, eventField)"> </td>
+        <td> <button type="button" class="btn btn-outline-success" @click="create(dateField, startTimeField, finishTimeField, eventField)">Create</button> </td>
       </tr>
       </tbody>
     </table>
@@ -101,14 +101,14 @@ export default {
         .catch(error => console.log('error', error))
       await this.loadEvents()
     },
-    create: function () {
-      if ((this.dateField !== '') && (this.startTimeField !== '') && (this.finishTimeField !== '') && (this.eventField !== '')) {
+    create: function (dateField, startTimeField, finishTimeField, eventField) {
+      if ((dateField !== '') && (startTimeField !== '') && (finishTimeField !== '') && (eventField !== '')) {
         const baseUrl = process.env.VUE_APP_BACKEND_BASE_URL
         const endpoint = baseUrl + '/termin/'
-        const date = this.dateField.split('.').reverse().join('-')
-        const startDate = new Date(date + ' ' + this.startTimeField)
-        const finishDate = new Date(date + ' ' + this.finishTimeField)
-        if (!this.isValidDate(date) || !this.isValidDate(startDate) || !this.isValidDate(finishDate) || this.eventField === ' ' ||
+        const date = dateField.split('.').reverse().join('-')
+        const startDate = new Date(date + ' ' + startTimeField)
+        const finishDate = new Date(date + ' ' + finishTimeField)
+        if (!this.isValidDate(date) || !this.isValidDate(startDate) || !this.isValidDate(finishDate) || eventField === ' ' ||
           finishDate <= startDate) {
           ElMessage.error('Error, please check your input!')
           return
@@ -116,7 +116,7 @@ export default {
         const data = {
           start: startDate,
           finish: finishDate,
-          event: this.eventField
+          event: eventField
         }
         const requestOptions = {
           method: 'POST',
