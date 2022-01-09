@@ -67,6 +67,7 @@
 
 <script>
 export default {
+  name: 'Calendar',
   data () {
     return {
       events: []
