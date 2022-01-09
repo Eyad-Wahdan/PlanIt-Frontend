@@ -54,6 +54,7 @@ export default {
   height: 46px;
   width: 200px;
   background-color: royalblue;
+  border-color: royalblue;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-size: 20px;
 }
