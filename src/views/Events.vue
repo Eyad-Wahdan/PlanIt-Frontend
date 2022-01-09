@@ -110,7 +110,7 @@ export default {
         const finishDate = new Date(date + ' ' + this.finishTimeField)
         if (!this.isValidDate(date) || !this.isValidDate(startDate) || !this.isValidDate(finishDate) || this.eventField === ' ' ||
           finishDate <= startDate) {
-          ElMessage.error('Oops, check your input!')
+          ElMessage.error('Error, please check your input!')
           return
         }
         const data = {
