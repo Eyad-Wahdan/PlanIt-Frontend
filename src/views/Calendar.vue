@@ -1,66 +1,68 @@
 <template>
   <div class="vueBackground">
-  <h1 style="font-family:'Times New Roman',serif;">Have a look at your Calendar!</h1>
-  <br>
-  <el-calendar>
-    <template #dateCell="cell">
-      <div class="cell" :class="{ current: cell.isCurrent }">
-        <span class="cellDate">{{ cell.data.day.slice(8) }}</span>
-        <br>
-        <span v-for="event in getTodaysEvents(cell, events)" :key="event.id">
-          <el-button v-if="event.event.length > 6" id="eventButton" type="primary" round data-bs-toggle="modal" data-bs-target="#eventModal">
+    <br>
+    <h1 style="font-family:'Georgia',serif;">Your Calendar</h1>
+    <br>
+    <el-calendar>
+      <template #dateCell="cell">
+        <div class="cell" :class="{ current: cell.isCurrent }">
+          <span class="cellDate">{{ cell.data.day.slice(8) }}</span>
+          <br>
+          <span v-for="event in getTodaysEvents(cell, events)" :key="event.id">
+          <el-button v-if="event.event.length > 6" id="eventButton" type="primary" round data-bs-toggle="modal"
+                     :data-bs-target="`#eventModal${event.id}`">
             {{ event.event.slice(0, 12) }}...
           </el-button>
-          <el-button v-else id="eventButton" type="primary" round data-bs-toggle="modal" data-bs-target="#eventModal">
+          <el-button v-else id="eventButton" type="primary" round data-bs-toggle="modal" :data-bs-target="`#eventModal${event.id}`">
             {{ event.event }}
           </el-button>
-          <div id="eventModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">{{ event.event }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          <div class="formDate">
-                            <label class="label">&#128197;Date:</label>
-                             <el-input disabled class="input" :placeholder="formatDate(event.start)"/>
-                          </div>
-                         <br>
-                         <div class="formStart">
-                            <label class="label">&#x1F551;Start:</label>
-                             <el-input disabled class="input" :placeholder="event.start.toLocaleTimeString().slice(0, -3)"/>
-                         </div>
-                        <br>
-                        <div class="formFinish">
-                            <label class="label">&#x1F556;Finish:</label>
-                             <el-input disabled class="input" :placeholder="event.finish.toLocaleTimeString().slice(0, -3)"/>
-                         </div>
-                        <br>
-                        <div class="formEvent">
-                            <label class="label">&#x1F4BC;Event:</label>
-                             <el-input disabled class="input" :placeholder="event.event"/>
-                         </div>
-                        <br>
-                        </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Done</button>
-                      </div>
+            <div :id="`eventModal${event.id}`" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ event.event }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="formDate">
+                      <label class="label">&#128197;Date:</label>
+                      <el-input disabled class="input" :placeholder="formatDate(event.start)"/>
                     </div>
+                    <br>
+                    <div class="formStart">
+                      <label class="label">&#x1F551;Start:</label>
+                      <el-input disabled class="input" :placeholder="event.start.toLocaleTimeString().slice(0, -3)"/>
+                    </div>
+                    <br>
+                    <div class="formFinish">
+                      <label class="label">&#x1F556;Finish:</label>
+                      <el-input disabled class="input" :placeholder="event.finish.toLocaleTimeString().slice(0, -3)"/>
+                    </div>
+                    <br>
+                    <div class="formEvent">
+                      <label class="label">&#x1F4BC;Event:</label>
+                      <el-input disabled class="input" :placeholder="event.event"/>
+                    </div>
+                    <br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Done</button>
                   </div>
                 </div>
-              <br>
-        </span>
-      </div>
-    </template>
-  </el-calendar>
-  <div id="stars">
-    <div id="stars2">
-      <div id="stars3">
+              </div>
+            </div>
+          </span>
+        </div>
+      </template>
+    </el-calendar>
+    <div id="stars">
+      <div id="stars2">
+        <div id="stars3">
+        </div>
       </div>
     </div>
   </div>
-    </div>
 </template>
 
 <script>
@@ -76,10 +78,6 @@ export default {
       const month = String(date.getMonth() + 1).padStart(2, '0')
       const year = date.getUTCFullYear()
       return `${day}.${month}.${year}`
-    },
-    setDateValue () {
-      const day = this.formatDate(this.event.start)
-      document.getElementById('dateInput').value = day
     },
     async loadEvents () {
       this.events = []
@@ -110,7 +108,7 @@ export default {
           ({ start: aStart }, { start: bStart }) =>
             aStart.getTime() - bStart.getTime()
         )
-      // console.log(events)
+      console.log(events)
       return events
     }
   },
@@ -159,7 +157,7 @@ h1 {
   float: left;
 }
 
-.input ::placeholder{
+.input ::placeholder {
   font-weight: bold;
   background-color: white;
 }

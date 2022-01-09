@@ -1,5 +1,5 @@
 <template>
-  <h1 style="font-family:'Times New Roman',serif;">Have a look at your Events!</h1>
+  <h1 style="font-family:'Georgia',serif;">Have a look at your Events!</h1>
   <div>
     <table>
       <thead>
