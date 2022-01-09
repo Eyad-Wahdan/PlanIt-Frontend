@@ -108,7 +108,7 @@ export default {
           ({ start: aStart }, { start: bStart }) =>
             aStart.getTime() - bStart.getTime()
         )
-      console.log(events)
+      // console.log(events)
       return events
     }
   },
