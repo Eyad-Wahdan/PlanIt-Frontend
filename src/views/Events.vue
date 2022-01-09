@@ -1,5 +1,6 @@
 <template>
-  <h1 style="font-family:'Georgia',serif;">Have a look at your Events!</h1>
+  <br>
+  <h1 style="font-family:'Georgia',serif;">Your Events</h1>
   <div>
     <table>
       <thead>
