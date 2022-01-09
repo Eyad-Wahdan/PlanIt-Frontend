@@ -48,9 +48,9 @@ PlanIt kann Termine erstellen mit Benutzerdefinierten Events und Zeiträumen, al
 ### Wie benutzt man PlanIt?
 Nachdem man PlanIt ausgeführt hat gelangt man auf die Homepage. Von da aus kann man auf "Let's get started" klicken und 
 damit auf die "Calender"-Seite gelangen. Der Kalender ist eine tolle Übersicht von den ganzen Terminen, die der Nutzer 
-erstellt hat. 
-![](../../../Users/wadim/Desktop/Calendar.png)
-![](../../../Users/wadim/Desktop/Terminübersicht.png)
+erstellt hat.
+![](src/assets/Calendar.png)
+![](src/assets/Terminübersicht.png)
 Von da aus kann man über die Taskleiste auf "Events" klicken. Da sieht man dann eine Tabelle mit den Events.
 Außerdem kann man da dann neue Events erstellen oder auch andere Events löschen.
 ![](src/assets/Delete.png)
