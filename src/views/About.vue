@@ -22,15 +22,13 @@
         Wir haben die Lösung für euch: PlanIt!</p>
       <div class="work">
         <h3>Wie funktioniert PlanIt?</h3>
-        <p>Nachdem man PlanIt aufgerufen hat gelangt man auf die Homepage. Von da aus kann man auf "Let's get started" klicken und
-          damit gelangt man auf die "Calender"-Seite. Der Kalender ist eine tolle Übersicht von den ganzen Terminen, die der Nutzer
-          erstellt hat. Mit einem Klick auf den Termin erhält man eine Einsicht in alle Informationen des Termins.
-          Von dem Kalender aus kann man über die Taskleiste auf "Events" klicken.
-          Dort erhält man eine Übersicht über alle erstellten Events und kann außerdem neue Events hinzufügen als auch bereits bestehende löschen.
+        <p>Nachdem man PlanIt ausgeführt hat gelangt man auf die Homepage. Von da aus kann man auf "Let's get started" klicken und
+          damit auf die "Calender"-Seite gelangen. Der Kalender ist eine tolle Übersicht von den ganzen Terminen, die der Nutzer
+          erstellt hat. Von da aus kann man über die Taskleiste auf "Events" klicken. Da sieht man dann eine Tabelle mit den Events.
           Außerdem kann man da dann neue Events erstellen oder auch andere Events löschen.
           <br>
           <br>
-          Um einen Termin zu erstellen, muss man die freien Eingabefelder ausfüllen und danach auf "Create" klicken.
+          Um einen Termin zu erstellen muss man die freien Eingabefelder ausfüllen und danach auf "Create" klicken.
           <br>
           <br>
           Um einen Termin zu löschen muss man einfach auf den "Delete"-Knopf klicken.</p>
@@ -40,7 +38,7 @@
   <div class="box">
     <div class="warum_planit">
       <h3>Warum PlanIt?</h3>
-      <p>PlanIt ist ein sehr benutzerfreundliches Programm, das sehr übersichtlich und einfach anwendbar ist. Man kann in nur wenigen Sekunden einen Event erstellen und wieder löschen.</p>
+      <p>PlanIt ist ein sehr benutzerfreundliches Programm, das sehr übersichtlich und einfach anwendbar ist. Man kann in nur wenigen Sekunden einen Event erstellen und wieder Löschen.</p>
     </div>
     <div class="für_wen">
       <h3>Für wen ist PlanIt?</h3>
@@ -69,12 +67,12 @@ export default {
 }
 
 .paragraph {
-  max-width: 50%;
+  max-width: 45%;
   padding-top: 10px;
 }
 
 .warum_planit {
-  max-width: 55%;
+  max-width: 50%;
   padding: 20px 100px 100px;
   text-align: left;
 }
@@ -93,11 +91,10 @@ export default {
 
 .picture {
   padding-right: 60px;
-  padding-top: 40px;
 }
 
 .work{
-  max-width: 50%;
+  max-width: 45%;
   padding-top: 35px;
 }
 .body{
